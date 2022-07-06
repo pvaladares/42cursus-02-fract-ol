@@ -1,4 +1,4 @@
-NAME    = canvas#
+NAME    = fractol#
 INC     = /usr/local/include#						# could be /usr/include depending on your OS
 INCFT   = ./libft/include#						# header from libft
 LIBFT   = ./libft#							# path to libft library
