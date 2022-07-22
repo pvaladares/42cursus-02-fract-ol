@@ -1,8 +1,8 @@
 
 
-#include <mlx.h>
-#include <stdio.h>
-#include <stdlib.h>
+    #include <mlx.h>
+    #include <stdio.h>
+    #include <stdlib.h>
 #include "fractol.h"
 #include <X11/keysym.h> // ESC key defintion
 #include <X11/Xlib.h> // XColor
