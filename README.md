@@ -1,6 +1,13 @@
 # 42cursus-02-fract-ol
 Discover 2D programming and the psychedelic universe of fractals in this project, using minilibX.
 
+# MLX 
+
+- https://harm-smits.github.io/42docs/libs/minilibx
+
+> First of all, we should take into account that the `mlx_pixel_put` function is very, very slow. This is because it tries to push the pixel instantly to the window (without waiting for the frame to be entirely rendered). Because of this sole reason, we will have to buffer all of our pixels to a image, which we will then push to the window.
+
+
 # Tips
 
 - The [`minilibx-linux.tgz`](files/minilibx-linux.tgz) has some man pages that are not in the other provided compressed files.
