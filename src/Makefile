@@ -1,5 +1,5 @@
-NAME := second
-OBJ := second.o
+NAME := fractol
+OBJ := fractol.o
 CC := cc
 
 %.o: %.c

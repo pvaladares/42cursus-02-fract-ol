@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   first.c                                            :+:      :+:    :+:   */
+/*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/05 11:44:44 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/07/22 12:57:53 by pvaladar         ###   ########.fr       */
+/*   Created: 2022/07/22 16:13:36 by pvaladar          #+#    #+#             */
+/*   Updated: 2022/07/22 16:14:37 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
-#include <unistd.h>
+#ifndef FRACTOL_H
+# define FRACTOL_H
 
-int	main(void)
+# define WIDTH   480
+# define HEIGHT  320
+// #define KEY_ESC    65307
+
+
+typedef struct s_data
 {
-	void	*mlx;
-	void	*mlx_win;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
 
-	(void)mlx;
-	(void)mlx_win;
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
-	mlx_loop(mlx);
-}
+#endif
