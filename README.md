@@ -44,3 +44,6 @@ DESCRIPTION
 
 - [MiniLibX - 42 Docs](https://harm-smits.github.io/42docs/libs/minilibx.html)
 - [X11 documentation about events](https://tronche.com/gui/x/xlib/events)
+- [Some examples with MLX](https://github.com/terry-yes/mlx_example)
+- [Image tutorials with MLX](https://github.com/keuhdall/images_example)
+- [minilibx sources and ft_fractal links](https://qst0.github.io/ft_libgfx/#ft_fractal)
