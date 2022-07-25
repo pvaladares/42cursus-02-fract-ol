@@ -6,34 +6,50 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:14:11 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/07/22 16:16:04 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/07/24 00:02:14 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
 #include "fractol.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+typedef struct s_vars
 {
-	char	*dst;
+	void	*mlx;
+	void	*win;
+}				t_vars;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+int	close(int keycode, t_vars *vars)
+{
+	//printf("Pressed key %d %c\n", keycode, keycode);
+	if (keycode == XK_Escape)
+	{
+		mlx_destroy_window(vars->mlx, vars->win);
+		exit(EXIT_SUCCESS);
+	}
+	return (0);
 }
-
 
 int	main(void)
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_data	img;
+	t_vars	vars;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
-	img.img = mlx_new_image(mlx, 1920, 1080);
-	img.addr = mlx_get_data_addr(
-			img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
+	vars.mlx = mlx_init();
+	if (!vars.mlx)
+	{
+		perror("Error with mlx_init()");
+		exit(EXIT_FAILURE);
+	}	
+	vars.win = mlx_new_window(vars.mlx, 500, 500, "Hello world!");
+	if (!vars.win)
+	{
+		perror("Error with mlx_new_window()");
+		//free(vars.mlx);
+		exit(EXIT_FAILURE);
+	}	
+	mlx_hook(vars.win, KeyPress, KeyPressMask, close, &vars);
+	mlx_loop(vars.mlx);
+	return (EXIT_SUCCESS);
 }
+
+// https://en.wikipedia.org/wiki/Mandelbrot_set
+
