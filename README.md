@@ -38,3 +38,9 @@ DESCRIPTION
        MiniLibX  is  an  easy way to create graphical software, without any X-Window programming knowl‐
        edge. It provides simple window creation, a drawing tool, image and basic events management.
 ```
+
+
+# Resources
+
+- [MiniLibX - 42 Docs](https://harm-smits.github.io/42docs/libs/minilibx.html)
+- [X11 documentation about events](https://tronche.com/gui/x/xlib/events)
