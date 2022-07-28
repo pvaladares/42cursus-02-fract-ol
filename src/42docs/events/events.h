@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   events.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/22 16:13:36 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/07/28 15:50:27 by pvaladar         ###   ########.fr       */
+/*   Created: 2022/07/28 15:56:47 by pvaladar          #+#    #+#             */
+/*   Updated: 2022/07/28 17:38:20 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#ifndef EVENTS_H
+# define EVENTS_H
 
 // ======================== DEFINITIONS
 
@@ -20,7 +20,7 @@
 # define HEIGHT		320
 
 // Title of window
-# define TITLE		"fract-ol by pvaladar - July 2022"
+# define TITLE		"42docs - events - by pvaladar - July 2022"
 
 // ======================== INCLUDES
 
@@ -68,68 +68,15 @@ typedef struct s_app
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	t_img	*img_ptr;
+	time_t	key_time_pressed;
+	char	key_flag_released;
+//	t_img	*img_ptr;
 }			t_app;
 
 /*
-	Take z being a complex number:
-		z = a + b*i
-	
-	Note:
-		i = sqrt(-1)
-		i * i = -1
-	
-	More info: https://en.wikipedia.org/wiki/Complex_number
-
-	a	: the real part of the complex number, moving on the x axis (Re)
-	b	: the imaginary part (Im) of the complex number, moving on the y axis (Im)
-*/
-typedef struct s_complex
+typedef struct s_key_pressed_time
 {
-	double	a;
-	double	b;
-}			t_complex;
-
-
-
-// ======================== PROTOTYPES
-
-// colours_1.c
-int		colour_get_trgb(int t, int r, int g, int b);
-int		colour_get_t(int trgb);
-int		colour_get_r(int trgb);
-int		colour_get_g(int trgb);
-int		colour_get_b(int trgb);
-
-// colours_2.c
-int		colour_get_opposite(int trgb);
-int		colour_add_shape(double distance, int trgb);
-
-// custom_mlx.c
-void	fast_mlx_pixel_put(t_img *img, int x, int y, int color);
-
-// hooks_config.c
-void	configure_hooks(t_app *self);
-
-// hooks_actions.c
-int		close_app(t_app *self);
-int		close_window_cross_window(t_app *self);
-int		close_window_esc_key(int keycode, t_app *self);
-int		mouse_hook(int button, int x, int y, t_app *self);
-
-// init.c
-void	fractol_init(t_app *app);
-
-/*
-// fractol.c
-void	my_mlx_pixel_put(t_data *img, int x, int y, int color);
-int		render_next_frame(t_data img);
-//void	show_help(t_app *self);
-
-// hooks.c
-int		close_window_cross_window(t_app *self);
-int		close_window_esc_key(int keycode, t_app *self);
-int		mouse_hook(int button, int x, int y, t_app *self);
-void	configure_hooks(t_app *self);
+	int	;
+}			t_key_pressed_time;
 */
 #endif
