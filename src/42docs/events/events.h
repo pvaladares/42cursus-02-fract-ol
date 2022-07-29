@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 15:56:47 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/07/28 17:38:20 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/07/29 11:04:35 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@
    More info about the relationship between Event Mask & Event Type here:
    https://tronche.com/gui/x/xlib/events/processing-overview.html */
 # include <X11/keysym.h> // Mapping keyboard keys (e.g.: XK_Escape)
-# include <stdio.h> // perror()
+# include <stdio.h> // perror(); NULL definition, printf(), puts()
 # include <stdlib.h> // exit()
-# include <unistd.h> // sleep()
+# include <time.h> // time()
 
 // ======================== TYPEDEF and STRUCTURES
 
@@ -50,9 +50,6 @@
 typedef struct s_img
 {
 	void	*img_ptr;
-	//char	*addr;
-	/* https://github.com/keuhdall/images_example/blob/master/example.h
-	*/
 	int		*addr;
 	int		bits_per_pixel;
 	int		line_length;
@@ -70,13 +67,25 @@ typedef struct s_app
 	void	*win_ptr;
 	time_t	key_time_pressed;
 	char	key_flag_released;
-//	t_img	*img_ptr;
 }			t_app;
 
-/*
-typedef struct s_key_pressed_time
-{
-	int	;
-}			t_key_pressed_time;
-*/
+// ======================== PROTOTYPES
+
+// events.c
+int		next_frame(t_app *app);
+
+// hooks_config.c
+void	configure_hooks(t_app *app);
+
+// hooks_keys_buttons.c
+int		check_key_pressed_not_released(t_app *app);
+int		hook_action_key_pressed_released(int keycode, t_app *app);
+int		hook_action_key_pressed(int keycode, t_app *app);
+int		hook_action_button_pressed(int button, int x, int y, t_app *app);
+
+// hooks_window.c
+int		hook_action_x_window_pressed(t_app *app);
+int		hook_action_enter_window(int button, int x, int y, t_app *app);
+int		hook_action_leave_window(int button, int x, int y, t_app *app);
+
 #endif

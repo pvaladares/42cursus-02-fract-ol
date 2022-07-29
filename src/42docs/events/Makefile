@@ -6,27 +6,42 @@
 #    By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/28 16:01:17 by pvaladar          #+#    #+#              #
-#    Updated: 2022/07/28 16:01:39 by pvaladar         ###   ########.fr        #
+#    Updated: 2022/07/29 11:22:25 by pvaladar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := events
-SRC := events.c
-#OBJ := fractol.o colours_1.o colours_2.o
+
 CC := cc
+
+CFLAGS := -Wall -Werror -Wextra
+
+SRC := events.c \
+		hooks_config.c \
+		hooks_keys_buttons.c \
+		hooks_window.c
+
+OBJS :=	${SRCS:.c=.o}
 
 MLX := ./mlx/libmlx.a
 
-#%.o: %.c
-#	$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
-
 $(NAME): $(SRC)
-#	$(CC) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
-	$(CC) $(SRC) $(MLX) -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -g -ggdb3 -o $(NAME)
+	$(CC) $(CFLAGS) $(SRC) $(MLX) -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -g -ggdb3 -o $(NAME)
 
-fclean:
-	rm -rf *.o $(NAME)
+all: $(NAME)
+
+clean:
+	rm -rf *.o
+
+fclean: clean
+	rm -rf $(NAME)
+
+re: fclean $(NAME)
 
 run: fclean $(NAME)
 	./$(NAME)
-	
+
+norm: $(SRC)
+	norminette $(SRC) events.h
+
+.PHONY: all clean fclean re run norm
