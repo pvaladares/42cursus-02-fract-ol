@@ -10,11 +10,10 @@ MLX := ./mlx/libmlx.a
 
 $(NAME): $(SRC)
 #	$(CC) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
-	$(CC) $(SRC) $(MLX) -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -g -ggdb3 -o $(NAME)
+	$(CC) $(SRC) $(MLX) -Lmlx_linux -L/usr/local/lib -Imlx_linux -lXext -lX11 -lm -lz -g -ggdb3 -o $(NAME)
 
 fclean:
 	rm -rf *.o fractol
 
 run: fclean $(NAME)
 	./$(NAME) 1 1
-	
