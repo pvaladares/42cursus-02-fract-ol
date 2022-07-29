@@ -21,3 +21,10 @@ Homework regarding Events found [here](https://harm-smits.github.io/42docs/libs/
 > - mouse enters the window, you should print Hello! in your terminal, when it leaves, you should print Bye!.
 - OK, implemented
 
+
+See the sources files for the implementation.
+
+In order to test just type
+```shell
+make run
+```
