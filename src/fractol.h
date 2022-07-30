@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:13:36 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/07/28 15:50:27 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/07/30 17:14:52 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 // ======================== INCLUDES
 
-# include "mlx/mlx.h" // local installation of MLX library
+# include <mlx.h> // MLX library
 # include <X11/X.h>
 /* For each event type, a corresponding constant name is defined in X11/X.h
    More info about the relationship between Event Mask & Event Type here:
@@ -118,7 +118,7 @@ int		close_window_esc_key(int keycode, t_app *self);
 int		mouse_hook(int button, int x, int y, t_app *self);
 
 // init.c
-void	fractol_init(t_app *app);
+void	fractol_init(t_app *app, t_img *img);
 
 /*
 // fractol.c

@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:14:11 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/07/28 15:51:12 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/07/30 17:28:34 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	render_next_frame(t_app *app)
 {
 	//int x, y;
 
+	(void)app;
 	puts("Rendering next frame...");
 	//mlx_mouse_get_pos(self.mlx_ptr, self.win_ptr, &x , &y);
 	//printf("Coordinates x = %d , y = %d\n", x, y);
@@ -44,11 +45,11 @@ int	main(int argc, char **argv)
 			"\e[92m./fractol <fractal-number | fractal-name or> [<optional parameters>]\n\e[0m");
 		return (EXIT_FAILURE);
 	}
-	fractol_init(&app);
+	fractol_init(&app, &img);
 
 	x = 0;
 	y = 0;
-	fast_mlx_pixel_put(&app.img_ptr, x, y, 0x00FF0000);
+	fast_mlx_pixel_put(&img, x, y, 0x00FF0000);
 /*
 	y = 0;
 	while (y < HEIGHT)
