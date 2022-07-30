@@ -1,14 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   complex.c                                          :+:      :+:    :+:   */
+/*   event_hooks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/28 13:59:26 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/07/28 14:00:50 by pvaladar         ###   ########.fr       */
+/*   Created: 2022/07/28 10:27:35 by pvaladar          #+#    #+#             */
+/*   Updated: 2022/07/30 18:36:49 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+void	configure_hooks(t_app *app)
+{
+	mlx_hook(app->win_ptr, ButtonPress, ButtonPressMask, handle_mouse, &app);
+	mlx_hook(app->win_ptr, KeyRelease, KeyReleaseMask, handle_keys, &app);
+	mlx_hook(
+		app->win_ptr, DestroyNotify, StructureNotifyMask, exit_program, &app);
+}

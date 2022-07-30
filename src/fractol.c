@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:14:11 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/07/30 17:28:34 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/07/30 19:36:18 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ int	render_next_frame(t_app *app)
 	return (0);
 }
 
+int	exit_program(void)
+{
+	exit(EXIT_SUCCESS);
+}
+
 /*
  Create mlx instance
  Create window instance
@@ -30,13 +35,22 @@ int	render_next_frame(t_app *app)
  Get the image address and use custom put function to write without showing it
  Render the image
 */
+
+#include <math.h>
+
 int	main(int argc, char **argv)
 {
 	t_app	app;
 	t_img	img;
-	int		x;
-	int		y;
 
+
+	/*
+	t_complex	c;
+
+	c.a = 2.0;
+	c.b = 2.0;
+	printf("Norm of (%Lf) with (%Lf) equals (%f)\n", c.a, c.b, hypot(c.a, c.b));
+*/
 	(void)(argv);
 	if (argc != 3)
 	{
@@ -46,30 +60,27 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	fractol_init(&app, &img);
-
-	x = 0;
-	y = 0;
-	fast_mlx_pixel_put(&img, x, y, 0x00FF0000);
 /*
 	y = 0;
-	while (y < HEIGHT)
+	while (y < 300)
 	{
 		x = 0;
-		while (x < WIDTH)
+		while (x < 300)
 		{
-			my_mlx_pixel_put(&img, x, y, 0x00FF0000);
-			//my_mlx_pixel_put(&img, x, y, (x+y)*1000);
+			fast_mlx_pixel_put(&img, x, y, 0x00FF0000);
 			x++;
 		}
 		y++;
 	}
 */
 
+	create_mandelbrot(&img);
 	mlx_put_image_to_window(app.mlx_ptr, app.win_ptr, img.img_ptr, 0, 0);
-
 	configure_hooks(&app);
 	//mlx_do_sync(app.mlx_ptr);
 	//mlx_loop_hook(app.mlx_ptr, render_next_frame, &app);
 	mlx_loop(app.mlx_ptr);
 	return (EXIT_SUCCESS);
 }
+
+// Go full screen ??

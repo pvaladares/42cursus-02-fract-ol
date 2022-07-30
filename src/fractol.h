@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:13:36 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/07/30 17:14:52 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/07/30 19:35:55 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,16 @@
 // ======================== DEFINITIONS
 
 // Size of window and images
-# define WIDTH		480
-# define HEIGHT		320
+# define WIDTH		1280
+# define HEIGHT		720
 
 // Title of window
-# define TITLE		"fract-ol by pvaladar - July 2022"
+# define TITLE		"fract-ol by pvaladar"
+
+// Debug variable: ON = 1 / OFF = 0
+# ifndef DEBUG
+#  define DEBUG		0
+# endif
 
 // ======================== INCLUDES
 
@@ -32,7 +37,7 @@
 # include <X11/keysym.h> // Mapping keyboard keys (e.g.: XK_Escape)
 # include <stdio.h> // perror()
 # include <stdlib.h> // exit()
-# include <unistd.h> // sleep()
+# include <math.h> // hypot() pow()
 
 // ======================== TYPEDEF and STRUCTURES
 
@@ -86,8 +91,8 @@ typedef struct s_app
 */
 typedef struct s_complex
 {
-	double	a;
-	double	b;
+	long double	a;
+	long double	b;
 }			t_complex;
 
 
@@ -109,27 +114,18 @@ int		colour_add_shape(double distance, int trgb);
 void	fast_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 // hooks_config.c
-void	configure_hooks(t_app *self);
+void	configure_hooks(t_app *app);
 
 // hooks_actions.c
-int		close_app(t_app *self);
-int		close_window_cross_window(t_app *self);
-int		close_window_esc_key(int keycode, t_app *self);
-int		mouse_hook(int button, int x, int y, t_app *self);
+int		close_app(t_app *app);
+int		handle_mouse(int button, int x, int y, t_app *app);
+int		handle_keys(int keycode, t_app *app);
 
 // init.c
 void	fractol_init(t_app *app, t_img *img);
+int		exit_program(void);
 
-/*
-// fractol.c
-void	my_mlx_pixel_put(t_data *img, int x, int y, int color);
-int		render_next_frame(t_data img);
-//void	show_help(t_app *self);
+void	create_mandelbrot(t_img *img);
 
-// hooks.c
-int		close_window_cross_window(t_app *self);
-int		close_window_esc_key(int keycode, t_app *self);
-int		mouse_hook(int button, int x, int y, t_app *self);
-void	configure_hooks(t_app *self);
-*/
+
 #endif
