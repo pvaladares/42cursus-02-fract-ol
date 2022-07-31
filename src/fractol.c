@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:14:11 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/07/30 19:36:18 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/07/31 15:15:34 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	main(int argc, char **argv)
 {
 	t_app	app;
 	t_img	img;
-
+	int		x;
+	int		y;
 
 	/*
 	t_complex	c;
@@ -60,23 +61,18 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	fractol_init(&app, &img);
-/*
-	y = 0;
-	while (y < 300)
-	{
-		x = 0;
-		while (x < 300)
-		{
-			fast_mlx_pixel_put(&img, x, y, 0x00FF0000);
-			x++;
-		}
-		y++;
-	}
-*/
-
 	create_mandelbrot(&img);
-	mlx_put_image_to_window(app.mlx_ptr, app.win_ptr, img.img_ptr, 0, 0);
 	configure_hooks(&app);
+
+	// show Re and Im axis
+	y = 0;
+	while (y < HEIGHT)
+			fast_mlx_pixel_put(&img, WIDTH / 2, y++, 0x00FF0000);
+	x = 0;
+	while (x < WIDTH)
+			fast_mlx_pixel_put(&img, x++, HEIGHT / 2, 0x00FF0000);
+	mlx_put_image_to_window(app.mlx_ptr, app.win_ptr, img.img_ptr, 0, 0);
+	
 	//mlx_do_sync(app.mlx_ptr);
 	//mlx_loop_hook(app.mlx_ptr, render_next_frame, &app);
 	mlx_loop(app.mlx_ptr);

@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 15:48:43 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/07/30 17:14:28 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/07/31 15:15:03 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ void	fractol_init(t_app *app, t_img *img)
 		exit(EXIT_FAILURE);
 	}
 	img->addr = (int *)mlx_get_data_addr(
-			img->img_ptr, &img->bits_per_pixel, &img->line_length, &img->endian);
+			img->img_ptr,
+			&img->bits_per_pixel, &img->line_length, &img->endian);
 }
