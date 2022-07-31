@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:13:36 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/07/30 19:35:55 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/07/31 16:02:56 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,5 @@ void	fractol_init(t_app *app, t_img *img);
 int		exit_program(void);
 
 void	create_mandelbrot(t_img *img);
-
 
 #endif

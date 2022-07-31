@@ -6,71 +6,11 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:06:57 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/07/31 15:26:04 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/07/31 16:04:42 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-// re = a
-// im = b
-// z = a + b *i
-/*
-static t_complex	complex_create(long double re, long double im)
-{
-	t_complex	z;
-
-	z.a = re;
-	z.b = im;
-	return (z);
-}
-*/
-// z = a + b*i
-// z * z = (a + b*i)^2 = (a*a + 2 * a * b * i + b * b * i* i)
-// a * a + 2 * a * b * i - b*b
-// Re = a * a - b * b
-// Im = 2 * a * b
-// http://xahlee.info/cmaci/fractal/mandelbrot.html
-/*
-static t_complex	complex_pow2(t_complex z)
-{
-	t_complex	result;
-
-	result.a = pow(z.a, 2) - pow(z.b, 2);
-	result.b = 2 * z.a * z.b;
-	return (result);
-}
-*/
-/*
-static t_complex	complex_add(t_complex z1, t_complex z2)
-{
-	t_complex	result;
-
-	result.a = z1.a + z2.a;
-	result.b = z1.b + z2.b;
-	return (result);
-}
-*/
-
-/*
- Function computes |z|
-*/
-/*
-static long double	complex_hypot(t_complex z)
-{
-	return (hypot(z.a, z.b));
-}
-*/
-/*
-fc(z) = z*z + c
-if c = 1
-
-	f1(0) = 0*0 + 1 = 1
-	f1(1) = 1*1 + 1 = 2
-	f1(2) = 2*2 + 1 = 5
-	f1(5) = 5*5 + 1 = 26
-
-*/
 
 /*
 static int	is_unstable(t_complex number, int iterations)
@@ -88,18 +28,23 @@ static int	is_unstable(t_complex number, int iterations)
 	return (0);
 }*/
 
-
 #include <stdbool.h>
 
+/*
+ Usually, the ‘x’ value ranges from -3 to +3, and the ‘y’ value ranges from -2 to +2.
+https://javalab.org/en/mandelbrot_set_en/
+
+https://github.com/sisittu99/fract-ol/blob/master/README_EN.md
+*/
 void	create_mandelbrot(t_img *img)
 {
 	int	 x, y;
 	//int	 c;
 	//char	buffer;
-	double MinRe = -2.0;
-	double MaxRe = 1.0;
-	double MinIm = -1.2;
-	double MaxIm = MinIm+(MaxRe-MinRe)*HEIGHT/WIDTH;
+	double MinRe = -3.0f;
+	double MaxRe = 3.0f;
+	double MinIm = -2.0f;
+	double MaxIm = 2.0f;
 	double Re_factor = (MaxRe-MinRe)/(WIDTH-1);
 	double Im_factor = (MaxIm-MinIm)/(HEIGHT-1);
 	unsigned MaxIterations = 100;
@@ -136,7 +81,7 @@ void	create_mandelbrot(t_img *img)
 				//mlx_pixel_put(mlx_ptr, win_ptr, x, y, 0x00FFFFFF); 
 			}
 			else
-				fast_mlx_pixel_put(img, x, y, 0x000000FF + n*n*n*n*n);
+				fast_mlx_pixel_put(img, x, y, 0x000000FF + n*n*n*n);
 
 			// z = 0 ; c = 0
 			// z_n+1 = zn * zn + c
