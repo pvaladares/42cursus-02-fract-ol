@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_handlers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: pvaladar <pvaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 10:27:56 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/07/30 18:37:26 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/08/02 14:48:01 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ int	handle_keys(int keycode, t_app *app)
 	(void)app;
 	if (keycode == XK_Escape)
 		exit_program();
-	else if (keycode == XK_Left)
+	else if (keycode == XK_Left || keycode == XK_a)
 		puts("Left");
-	else if (keycode == XK_Right)
+	else if (keycode == XK_Right || keycode == XK_d)
 		puts("Right");
-	else if (keycode == XK_Up)
+	else if (keycode == XK_Up || keycode == XK_w)
 		puts("Up");
-	else if (keycode == XK_Down)
+	else if (keycode == XK_Down || keycode == XK_s)
 		puts("Down");
 	else if (DEBUG)
 		printf("Pressed key %d %c\n", keycode, keycode);
@@ -41,19 +41,26 @@ int	handle_keys(int keycode, t_app *app)
 
 // Button4 == Scrool up
 // Button5 == Scrool down
-int	handle_mouse(int button, int x, int y, t_app *app)
+int	handle_mouse(int button, int x, int y, t_img *img)
 {
-	if (button == XK_Pointer_Button4)
+	if (button == Button4)
+	{
 		puts("4 - Zoom in / Scroll up");
-	else if (button == XK_Pointer_Button5)
+		printf("re_max = %f\n", img->re_max);
+		img->re_max *= 1.1;
+		//img->re_min *= 1.1;
+		//img->im_max *= 1.1;
+		printf("re_max = %f\n", img->re_max);
+	}
+	else if (button == Button5)
 		puts("5 - Zoom out / Scrool down");
-	else if (button == XK_Pointer_Button1)
+	else if (button == Button1)
 		puts("1 - Left");
-	else if (button == XK_Pointer_Button2)
+	else if (button == Button2)
 		puts("2 - Right");
-	else if (button == XK_Pointer_Button3)
+	else if (button == Button3)
 		puts("3 - Middle");
-	(void)app;
+	printf("Button pressed = (%d) , (%c)\n", button, button);
 	printf("Coordinates x = %d , y = %d\n", x, y);
 	return (0);
 }

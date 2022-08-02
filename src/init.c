@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: pvaladar <pvaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 15:48:43 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/07/31 15:15:03 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/08/02 14:23:06 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,10 @@ void	fractol_init(t_app *app, t_img *img)
 	img->addr = (int *)mlx_get_data_addr(
 			img->img_ptr,
 			&img->bits_per_pixel, &img->line_length, &img->endian);
+
+	img->re_min = -1.50f;
+	img->re_max = 1.50f;
+	img->im_max = 1.50f;
+
+	app->img_ptr = img;
 }

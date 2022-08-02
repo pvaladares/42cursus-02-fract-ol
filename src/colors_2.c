@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: pvaladar <pvaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 14:51:06 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/07/30 17:09:30 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/08/02 14:14:04 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,27 @@ int	colour_add_shape(double distance, int trgb)
 	g = (int)(colour_get_g(trgb) * distance);
 	b = (int)(colour_get_b(trgb) * distance);
 	return (t << 24 | r << 16 | g << 8 | b);
+}
+
+/*
+ Function to implement a smooth transiction between color bands
+ We have implemented the method described in [Sil13]. This method uses a slight
+modification of Bernstein polynomials to achieve a continuous coloring scheme. We use three polynomials
+to map each color channel to a value in [ 0, 255 ] , see Figure 3.3. Because the three polynomials ‘flow’ into
+each other, the color will smoothly transition to the next one when iterating over t. The formulas for the
+polynomials are
+r ( t ) = 9 ∗ ( 1 − t ) ∗ t 3 ∗ 255
+g ( t ) = 15 ∗ ( 1 − t ) 2 ∗ t 2 ∗ 255
+b ( t ) = 8.5 ∗ ( 1 − t ) 3 ∗ t ∗ 255
+*/
+int	color_bernstein_polynomials(double t)
+{
+	return(
+		colour_get_trgb(
+						0, 
+						(int)(9 * ( 1 - t ) * t * t * t  * 255),
+						(int)(15 * ( 1 - t ) * t * t * 255),
+						(int)(8.5 * ( 1 - t ) * t * 255)
+						)
+		);
 }

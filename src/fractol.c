@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: pvaladar <pvaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:14:11 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/07/31 16:03:14 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/08/02 14:49:19 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,7 @@ int	main(int argc, char **argv)
 {
 	t_app	app;
 	t_img	img;
-	int		x;
-	int		y;
 
-	/*
-	t_complex	c;
-
-	c.a = 2.0;
-	c.b = 2.0;
-	printf("Norm of (%Lf) with (%Lf) equals (%f)\n", c.a, c.b, hypot(c.a, c.b));
-*/
 	(void)(argv);
 	if (argc != 3)
 	{
@@ -62,17 +53,9 @@ int	main(int argc, char **argv)
 	}
 	fractol_init(&app, &img);
 	create_mandelbrot(&img);
-	configure_hooks(&app);
-
-	// show Re and Im axis
-	y = 0;
-	while (y < HEIGHT)
-			fast_mlx_pixel_put(&img, WIDTH / 2, y++, 0x00FF0000);
-	x = 0;
-	while (x < WIDTH)
-			fast_mlx_pixel_put(&img, x++, HEIGHT / 2, 0x00FF0000);
+	//create_julia(&img);
+	configure_hooks(&app, &img);
 	mlx_put_image_to_window(app.mlx_ptr, app.win_ptr, img.img_ptr, 0, 0);
-	
 	//mlx_do_sync(app.mlx_ptr);
 	//mlx_loop_hook(app.mlx_ptr, render_next_frame, &app);
 	mlx_loop(app.mlx_ptr);
