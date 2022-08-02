@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:13:36 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/08/02 14:44:00 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/08/02 17:35:47 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 // Debug variable: ON = 1 / OFF = 0
 # ifndef DEBUG
-#  define DEBUG		0
+#  define DEBUG		1
 # endif
 
 // Maximum number of iterations
@@ -68,7 +68,10 @@ typedef struct s_img
 	int		endian;
 	double 	re_min;
 	double 	re_max;
+	double	im_min;
 	double 	im_max;
+	double	x_ratio;
+	double	y_ratio;
 }			t_img;
 
 /*
@@ -80,7 +83,7 @@ typedef struct s_app
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	t_img	*img_ptr;
+	void	*img_ptr;
 }			t_app;
 
 /*
@@ -98,11 +101,9 @@ typedef struct s_app
 */
 typedef struct s_complex
 {
-	long double	re;
-	long double	im;
+	double	re;
+	double	im;
 }			t_complex;
-
-
 
 /*
 
@@ -124,41 +125,40 @@ P(x = 0, y = 0) corresponds to [re_min, im_max]
 
 // ======================== PROTOTYPES
 
-// colours_1.c
-int		colour_get_trgb(int t, int r, int g, int b);
-int		colour_get_t(int trgb);
-int		colour_get_r(int trgb);
-int		colour_get_g(int trgb);
-int		colour_get_b(int trgb);
+// Colors
+int		color_get_trgb(int t, int r, int g, int b);
+int		color_get_t(int trgb);
+int		color_get_r(int trgb);
+int		color_get_g(int trgb);
+int		color_get_b(int trgb);
+int		color_get_opposite(int trgb);
+int		color_add_shape(double distance, int trgb);
 
-// colours_2.c
-int		colour_get_opposite(int trgb);
-int		colour_add_shape(double distance, int trgb);
-
-// custom_mlx.c
+// Custom MLX functions
 void	fast_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 // hooks_config.c
-void	configure_hooks(t_app *app, t_img *img);
+void	configure_hooks(t_app *app);
 
 // hooks_actions.c
 int		close_app(t_app *app);
-int	handle_mouse(int button, int x, int y, t_img *img);
+int		handle_mouse(int button, int x, int y, t_app *app);
 int		handle_keys(int keycode, t_app *app);
 
 // init.c
 void	fractol_init(t_app *app, t_img *img);
 int		exit_program(void);
 
-void	create_mandelbrot(t_img *img);
+void	create_mandelbrot(t_app *app);
 void	create_julia(t_img *img);
 
-
-
+// Complex numbers
 t_complex	complex_pow2(t_complex z);
 t_complex	complex_add(t_complex z1, t_complex z2);
-long double	complex_norm(t_complex z);
+double		complex_norm(t_complex z);
 
-int	color_bernstein_polynomials(double t);
+int	color_bernstein_polynomials1(double t);
+int	color_bernstein_polynomials2(double t);
+int	color_bernstein_polynomials3(double t);
 
 #endif

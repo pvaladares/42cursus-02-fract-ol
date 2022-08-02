@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 15:39:20 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/08/02 14:12:02 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/08/02 17:09:34 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_complex	complex_add(t_complex z1, t_complex z2)
 /*
  Function computes |z|
 */
-long double	complex_norm(t_complex z)
+double	complex_norm(t_complex z)
 {
 	return (hypot(z.re, z.im));
 }

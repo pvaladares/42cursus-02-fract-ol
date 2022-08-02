@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:14:11 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/08/02 14:49:19 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/08/02 17:24:40 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	main(int argc, char **argv)
 	t_app	app;
 	t_img	img;
 
+	char	buff[] = "test";
 	(void)(argv);
 	if (argc != 3)
 	{
@@ -52,10 +53,12 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	fractol_init(&app, &img);
-	create_mandelbrot(&img);
+	create_mandelbrot(&app);
 	//create_julia(&img);
-	configure_hooks(&app, &img);
+	configure_hooks(&app);
 	mlx_put_image_to_window(app.mlx_ptr, app.win_ptr, img.img_ptr, 0, 0);
+	//strjoin(buff, gcvt(img.re_max, 4, buff));
+	mlx_string_put(app.mlx_ptr, app.win_ptr, 10, 10, 0x00FF0000, buff);
 	//mlx_do_sync(app.mlx_ptr);
 	//mlx_loop_hook(app.mlx_ptr, render_next_frame, &app);
 	mlx_loop(app.mlx_ptr);

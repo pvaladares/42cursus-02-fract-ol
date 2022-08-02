@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:06:57 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/08/02 14:20:58 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/08/02 16:25:26 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ https://javalab.org/en/mandelbrot_set_en/
 
 https://github.com/sisittu99/fract-ol/blob/master/README_EN.md
 */
-void	create_mandelbrot(t_img *img)
+void	create_mandelbrot(t_app *app)
 {
 	int	 x, y;
 	t_complex c;
 	t_complex z;
-
+	t_img	*img;
 	int n;
 	int color;
 	float t;
@@ -52,7 +52,10 @@ void	create_mandelbrot(t_img *img)
 	unsigned MaxIterations = 100;
 	unsigned int	n;
 */
-
+	img = malloc(sizeof(t_img));
+	if (!img)
+		exit(EXIT_FAILURE);
+	img = app->img_ptr;
 	double pixel_size = (img->re_max - img->re_min) / WIDTH;
 	y = 0;
 	while (y < HEIGHT)
@@ -74,15 +77,16 @@ void	create_mandelbrot(t_img *img)
 			}
 			if ( DEBUG && (c.re == 0.0f || c.im == 0.0f)) // draw axis after convert from pixels to point
 				fast_mlx_pixel_put(img, x, y, 0x00FF0000);
-			else
-			{
+			else 
+			{ // color using smooth pallete
 				t = (float)n / NMAX;
-				color = color_bernstein_polynomials(t);
+				color = color_bernstein_polynomials1(t);
 				fast_mlx_pixel_put(img, x, y, color);
 			}
 			x++;
 		}
 		y++;
+		//mlx_string_put()
 	}
 
 /*
