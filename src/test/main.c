@@ -113,7 +113,7 @@ int	safe_quit()
 	if (info()->img_ptr)
 	{
 		mlx_destroy_image(info()->mlx_ptr, info()->img_ptr);
-		info()->img_ptr = NULL;
+		info()->img_ptr = NULL;1000
 	}
 	if (info()->win_ptr)
 	{
@@ -169,12 +169,20 @@ int	key_released(int keycode)
 	else if (keycode == XK_plus || keycode == XK_KP_Add)
 	{
 		puts("> +");
-
-
+		info()->re_min /= 3.0f;
+		info()->re_max /= 3.0f;
+		info()->im_min /= 3.0f;
+		info()->im_max /= 3.0f;
+		info()->x_ratio = (info()->re_max - info()->re_min) / (double)WIDTH;
+		info()->y_ratio = (info()->im_max - info()->im_min) / (double)HEIGHT;
+		draw();
 	}
-		
 	else if (keycode == XK_1 || keycode == XK_KP_End)
 		puts("> Mandelbrot");
+	else if (keycode == XK_r) // reset
+	{
+		
+	}
 	return (0);
 }
 
@@ -186,6 +194,8 @@ void	create_mandelbrot()
 	t_complex c;
 	t_complex z;
 	int iterations;
+	int color;
+	float t;
 	//int color;
 	//float t;
 	/*
@@ -225,7 +235,9 @@ void	create_mandelbrot()
 				fast_mlx_pixel_put(x, y, color);
 			}*/
 			//if (x == WIDTH / 2 || y == HEIGHT / 2)
-			fast_mlx_pixel_put(x, y, 0x000000FF + pow(iterations,5));
+				t = (float)iterations / MAX_ITERATIONS;
+				color = color_bernstein_polynomials1(t);
+				fast_mlx_pixel_put(x, y, color);
 		//	else
 		//		fast_mlx_pixel_put(x, y, 0x00FF0000);
 
