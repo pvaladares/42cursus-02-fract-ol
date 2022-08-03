@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvaladar <pvaladar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 14:51:06 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/08/02 17:09:25 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/08/03 23:12:18 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,27 +75,20 @@ b ( t ) = 8.5 ∗ ( 1 − t ) 3 ∗ t ∗ 255
 */
 int	color_bernstein_polynomials1(double t)
 {
-	int raw_color;
+	int	raw_color;
 
-	raw_color = color_get_trgb(0, 
-						(int)(9 * ( 1 - t ) * t * t * t  * 255),
-						(int)(15 * ( 1 - t ) * t * t * 255),
-						(int)(8.5 * ( 1 - t ) * t * 255)
-						);
+	raw_color = color_get_trgb(0,
+		(int)(9 * ( 1 - t ) * t * t * t  * 255),
+		(int)(15 * ( 1 - t ) * t * t * 255),
+		(int)(8.5 * ( 1 - t ) * t * 255));
 	return (raw_color % 0xFFFFFF);
-	
 }
 
 int	color_bernstein_polynomials2(double t)
 {
-	return(
-		color_get_trgb(
-						0, 
-						(int)(8.5 * ( 1 - t ) * t * 255),
-						(int)(9 * ( 1 - t ) * t * t * t  * 255),
-						(int)(15 * ( 1 - t ) * t * t * 255)
-						)
-		);
+	return (color_get_trgb(0, (int)(8.5 * ( 1 - t ) * t * 255),
+				(int)(9 * ( 1 - t ) * t * t * t  * 255),
+				(int)(15 * ( 1 - t ) * t * t * 255)));
 }
 
 int	color_bernstein_polynomials3(double t)

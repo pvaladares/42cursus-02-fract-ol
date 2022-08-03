@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/03 23:13:37 by pvaladar          #+#    #+#             */
+/*   Updated: 2022/08/04 00:35:07 by pvaladar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 /*contains information about the mlx pointers and windows*/
@@ -10,12 +22,11 @@ t_app	*info(void)
 
 void	fast_mlx_pixel_put(int x, int y, int color)
 {
-	//x += WIDTH / 2;
-	//y += HEIGHT / 2;ãpp
 	info()->img_addr[y * WIDTH + x] = color;
 }
 
-void	initialize_variables()
+
+void	initialize_variables(void)
 {
 	info()->re_min = -2.0f;
 	info()->re_max = +2.0f;
@@ -28,8 +39,11 @@ void	initialize_variables()
 		printf("x ratio: (%f)\n", info()->x_ratio);
 		printf("y ratio: (%f)\n", info()->y_ratio);
 	}
+	create_mlx();
+}
 
-
+void	create_mlx(void)
+{
 	info()->mlx_ptr = mlx_init();
 	if (!info()->mlx_ptr)
 	{
@@ -49,12 +63,8 @@ void	initialize_variables()
 		exit(EXIT_FAILURE);
 	}
 	info()->img_addr = (int *)mlx_get_data_addr(
-			info()->img_ptr,
-			&info()->bits_per_pixel, &info()->line_length, &info()->endian);
-
-	//info()->img_ptr = info()->img_address;
-
-
+		info()->img_ptr, &info()->bits_per_pixel, &info()->line_length,
+		&info()->endian);
 }
 
 int	fractal_mandelbrot(int x, int y)
@@ -66,13 +76,12 @@ int	fractal_mandelbrot(int x, int y)
 	// Convert integer x,y coordinates TO double complex Re, Im
 	c.re = info()->re_min + (x * info()->x_ratio);
 	c.im = info()->im_max - (y * info()->y_ratio);
-	z.re = 0.0f;  // z_n+1 = z_n * z_n + c, z_0 = 0
-	z.im = 0.0f;
+	z = (t_complex){0.0f, 0.0f}; // z_n0
+	//z.re = 0.0f;  // z_n+1 = z_n * z_n + c, z_0 = 0
+	//z.im = 0.0f;
 	i = 1; // iteration starts on 1
-	while (i <= MAX_ITERATIONS)
+	while (c.re * c.re + c.im * c.im <= 4 && i <= MAX_ITERATIONS)
 	{
-		if (complex_norm(c) > 2)
-			break; // diverges to inf.
 		z = complex_add(complex_pow2(z), c);
 		i++;
 	}
@@ -84,9 +93,6 @@ int	fractal_mandelbrot(int x, int y)
 
 int	mouse_button_pressed(int button, int x, int y)
 {
-	
-	//mlx_clear_window(info()->mlx_ptr, info()->win_ptr);
-	//mlx_do_sync(info()->mlx_ptr);
 	if (DEBUG)
 	{
 		puts("== ENTERED MOUSE BUTTON PRESSED ==");
@@ -97,23 +103,17 @@ int	mouse_button_pressed(int button, int x, int y)
 		puts("Zoom in");
 	else if (button == Button5) // Zoom out
 		puts("Zoom out");
-	//mlx_string_put(app->mlx_ptr, app->win_ptr, x, y, 0x00FF0000, "Hello");
-	//y = HEIGHT - y;
 	if (DEBUG)
 		printf("Correct cursor coordinates:\t(x = %d, y = %d)\n", x, y);
-	//fast_mlx_pixel_put(x, y, 0x00FF0000);
-	//mlx_put_image_to_window(info()->mlx_ptr, info()->win_ptr,
-//		info()->img_ptr, 0, 0);
 	return (0);
 }
 
 int	safe_quit()
 {
-	/*
 	if (info()->img_ptr)
 	{
 		mlx_destroy_image(info()->mlx_ptr, info()->img_ptr);
-		info()->img_ptr = NULL;1000
+		info()->img_ptr = NULL;
 	}
 	if (info()->win_ptr)
 	{
@@ -124,7 +124,7 @@ int	safe_quit()
 	{
 		mlx_destroy_display(info()->mlx_ptr);
 		info()->mlx_ptr = NULL;
-	}*/
+	}
 	exit(EXIT_SUCCESS);
 	return (0);
 }
@@ -181,73 +181,51 @@ int	key_released(int keycode)
 		puts("> Mandelbrot");
 	else if (keycode == XK_r) // reset
 	{
-		
+		;
 	}
 	return (0);
 }
 
-
-
 void	create_mandelbrot()
 {
-	int	 x, y;
-	t_complex c;
-	t_complex z;
-	int iterations;
-	int color;
-	float t;
-	//int color;
-	//float t;
-	/*
-	double im_min = -2.0f;
-	double re_factor = (re_max-re_min)/(WIDTH-1);
-	double im_factor = (im_max-im_min)/(HEIGHT-1);
-	unsigned MaxIterations = 100;
-	unsigned int	n;
-*/
-	//double pixel_size = (info()->re_max - info()->re_min) / WIDTH;
-	y = 0;
-	while (y < HEIGHT)
+	int			x;
+	int			y;
+	int			i;
+	t_complex	c;
+	t_complex	z;
+
+	y = -1;
+	while (++y < HEIGHT)
 	{
-		x = 0;
-		while (x < WIDTH)
+		x = -1;
+		while (++x < WIDTH)
 		{
 			c.re = info()->re_min + (x * info()->x_ratio);
 			c.im = info()->im_max - (y * info()->y_ratio);
 			z.re = 0.0f;
 			z.im = 0.0f;
-			iterations = 1;
-			while (iterations < MAX_ITERATIONS)
-			{
-				if (complex_norm(z) > 2)
-					break;
+			i = 0;
+			while (z.re * z.re + z.im * z.im < 4 && ++i < MAX_ITERATIONS)
 				z = complex_add(complex_pow2(z), c);
-				iterations++;
-			}
-			
-			if ( DEBUG && (c.re == 0.0f || c.im == 0.0f)) // draw axis after convert from pixels to point
-				fast_mlx_pixel_put(x, y, 0x00FF0000);
-				/*
-			else 
-			{ // color using smooth pallete
-				//t = (float)n / MAX_ITERATIONS;
-				color = 0x00FF0000 + n*n*n;
-				fast_mlx_pixel_put(x, y, color);
-			}*/
-			//if (x == WIDTH / 2 || y == HEIGHT / 2)
-				t = (float)iterations / MAX_ITERATIONS;
-				color = color_bernstein_polynomials1(t);
-				fast_mlx_pixel_put(x, y, color);
-		//	else
-		//		fast_mlx_pixel_put(x, y, 0x00FF0000);
-
-			x++;
+			set_color(x, y, i);
 		}
-		y++;
-		//mlx_string_put()
 	}
 }
 
+void set_color(int x, int y, int i)
+{
+	int			color;
+	double		t;
+
+	if (x == WIDTH / 2 || y == HEIGHT / 2)
+		fast_mlx_pixel_put(x, y, 0x00FF0000);
+	else
+	{
+		t = (double)i / MAX_ITERATIONS;
+		color = color_bernstein_polynomials1(t);
+		fast_mlx_pixel_put(x, y, color);
+	}
+}
 
 void	draw()
 {

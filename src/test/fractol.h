@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:13:36 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/08/03 17:59:57 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/08/04 00:35:19 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 // ======================== DEFINITIONS
 
 // Size of window and images
-# define HEIGHT			500
-# define WIDTH			500
+# define HEIGHT			600
+# define WIDTH			800
 
 // Title of window
 # define TITLE		"fract-ol by pvaladar"
@@ -28,7 +28,7 @@
 # endif
 
 // Maximum number of iterations
-# define MAX_ITERATIONS	256
+# define MAX_ITERATIONS	100
 
 // ======================== INCLUDES
 
@@ -65,10 +65,12 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	double 	re_min;
-	double 	re_max;
+	double	re_min;
+	double	re_max;
+	double	re_delta;
 	double	im_min;
-	double 	im_max;
+	double	im_max;
+	double	im_delta;
 	double	x_ratio;
 	double	y_ratio;
 }			t_img;
@@ -87,10 +89,12 @@ typedef struct s_app
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	double 	re_min;
-	double 	re_max;
+	double	re_min;
+	double	re_max;
+	double	re_delta;
 	double	im_min;
-	double 	im_max;
+	double	im_max;
+	double	im_delta;
 	double	x_ratio;
 	double	y_ratio;
 }			t_app;
@@ -120,7 +124,6 @@ typedef struct s_pixel
 	int		y;
 }				t_pixel;
 
-			//if (x == WIDTH / 2 || y == HEIGHT / 2)
 /*
 
 re_min Represent the interval [re_min, re_max] which is displayed horizontally
@@ -151,14 +154,10 @@ int	key_released(int keycode);
 void	create_mandelbrot();
 void	draw();
 
-
-
-
 t_complex	complex_pow2(t_complex z);
 t_complex	complex_add(t_complex z1, t_complex z2);
 double		complex_norm(t_complex z);
-
-
+void	create_mlx(void);
 
 // Colors
 int	color_get_trgb(int t, int r, int g, int b);
@@ -171,5 +170,6 @@ int	color_add_shape(double distance, int trgb);
 int	color_bernstein_polynomials1(double t);
 int	color_bernstein_polynomials2(double t);
 int	color_bernstein_polynomials3(double t);
+void set_color(int x, int y, int i);
 
 #endif
