@@ -6,7 +6,7 @@
 #    By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/28 16:01:17 by pvaladar          #+#    #+#              #
-#    Updated: 2022/08/03 16:57:16 by pvaladar         ###   ########.fr        #
+#    Updated: 2022/08/03 18:14:36 by pvaladar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME := fractol
 
 CC := cc
 
-CFLAGS := -Wall -Werror -Wextra -g -fsanitize=address,undefined,leak
+CFLAGS := -Wall -Werror -Wextra -g -fsanitize=address,undefined,leak -O3
 
 SRC :=	*.c
 
