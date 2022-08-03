@@ -47,3 +47,4 @@ DESCRIPTION
 - [Some examples with MLX](https://github.com/terry-yes/mlx_example)
 - [Image tutorials with MLX](https://github.com/keuhdall/images_example)
 - [minilibx sources and ft_fractal links](https://qst0.github.io/ft_libgfx/#ft_fractal)
+- [Smooth Zoom - stackoverflow](https://stackoverflow.com/questions/41796832/smooth-zoom-with-mouse-in-mandelbrot-set-c)
