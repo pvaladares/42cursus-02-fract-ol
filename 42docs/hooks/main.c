@@ -1,42 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 15:58:20 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/07/29 23:25:45 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/08/03 13:32:57 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hooks.h"
 
 /*
- This routine is executed every loop
+ Register to catch all events required
 */
-int	next_frame(t_app *app)
+static void	configure_hooks(t_app *app)
 {
-	//int	x;
-	//int	y;
-
-	(void)app;
-	/*
-	mlx_mouse_get_pos(app->mlx_ptr, app->win_ptr, &x, &y); // segmentation fault
-	if (x != app->x_cursor_saved || y != app->y_cursor_saved)
-	{
-		printf("New mouse position (%d), (%d)\n", x, y);
-		app->x_cursor_saved = x;
-		app->y_cursor_saved = y;
-	}
-	*/
-	return (0);
+	mlx_hook(app->win_ptr, KeyRelease, KeyReleaseMask,
+		key_released, &app);
+	mlx_hook(app->win_ptr, ButtonPress, ButtonPressMask,
+		mouse_button_pressed, &app);
+	mlx_hook(app->win_ptr, MotionNotify, PointerMotionMask,
+		cursor_moved, &app);
 }
 
 /*
  Initializes the mlx, window and image instances and handles any error
 */
-static void	init(t_app *app, t_img *img)
+static void	init(t_app *app)
 {
 	app->mlx_ptr = mlx_init();
 	if (!app->mlx_ptr)
@@ -50,15 +42,15 @@ static void	init(t_app *app, t_img *img)
 		perror("Error with mlx_new_window()");
 		exit(EXIT_FAILURE);
 	}
-	img->img_ptr = mlx_new_image(app->mlx_ptr, WIDTH, HEIGHT);
-	if (!img->img_ptr)
+	app->img_ptr = mlx_new_image(app->mlx_ptr, WIDTH, HEIGHT);
+	if (!app->img_ptr)
 	{
 		perror("Error with mlx_new_image()");
 		exit(EXIT_FAILURE);
 	}
-	img->addr = (int *)mlx_get_data_addr(
-			img->img_ptr, &img->bits_per_pixel, &img->line_length,
-			&img->endian);
+	app->img_addr = (int *)mlx_get_data_addr(
+			app->img_ptr, &app->bits_per_pixel, &app->line_length,
+			&app->endian);
 }
 
 /*
@@ -67,24 +59,18 @@ static void	init(t_app *app, t_img *img)
 	- a key is pressed, it will print the key code in the terminal.
 
 	- the mouse if moved, it will print the current position of that mouse
-	in the terminal. ### NOT WORKING !!!
+	in the terminal.
 
 	- a mouse is pressed, it will print the angle at which it moved over the 
-	window to the terminal. ### NOT WORKING !!!
+	window to the terminal.
 	
 */
 int	main(void)
 {
 	t_app	app;
-	t_img	img;
 
-	init(&app, &img);
+	init(&app);
 	configure_hooks(&app);
-	mlx_mouse_get_pos(app.mlx_ptr, app.win_ptr,
-		&app.x_cursor_start, &app.y_cursor_start);
-	if (DEBUG)
-		printf("DEBUG: Initial mouse position:\t(x = %d, y = %d)\n",
-			app.x_cursor_start, app.y_cursor_start);
 	mlx_loop(app.mlx_ptr);
 	return (0);
 }
