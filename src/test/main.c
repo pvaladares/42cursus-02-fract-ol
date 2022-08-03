@@ -167,7 +167,12 @@ int	key_released(int keycode)
 	else if (keycode == XK_minus || keycode == XK_KP_Subtract)
 		puts("> -");
 	else if (keycode == XK_plus || keycode == XK_KP_Add)
+	{
 		puts("> +");
+
+
+	}
+		
 	else if (keycode == XK_1 || keycode == XK_KP_End)
 		puts("> Mandelbrot");
 	return (0);
@@ -180,7 +185,7 @@ void	create_mandelbrot()
 	int	 x, y;
 	t_complex c;
 	t_complex z;
-	int n;
+	int iterations;
 	//int color;
 	//float t;
 	/*
@@ -190,28 +195,29 @@ void	create_mandelbrot()
 	unsigned MaxIterations = 100;
 	unsigned int	n;
 */
-	double pixel_size = (info()->re_max - info()->re_min) / WIDTH;
+	//double pixel_size = (info()->re_max - info()->re_min) / WIDTH;
 	y = 0;
 	while (y < HEIGHT)
 	{
 		x = 0;
 		while (x < WIDTH)
 		{
-			c.re = info()->re_min+ (x * pixel_size);
-			c.im = info()->im_max - (y * pixel_size);
+			c.re = info()->re_min + (x * info()->x_ratio);
+			c.im = info()->im_max - (y * info()->y_ratio);
 			z.re = 0.0f;
 			z.im = 0.0f;
-			n = 1;
-			while (n < MAX_ITERATIONS)
+			iterations = 1;
+			while (iterations < MAX_ITERATIONS)
 			{
 				if (complex_norm(z) > 2)
 					break;
 				z = complex_add(complex_pow2(z), c);
-				n++;
+				iterations++;
 			}
-			/*
+			
 			if ( DEBUG && (c.re == 0.0f || c.im == 0.0f)) // draw axis after convert from pixels to point
 				fast_mlx_pixel_put(x, y, 0x00FF0000);
+				/*
 			else 
 			{ // color using smooth pallete
 				//t = (float)n / MAX_ITERATIONS;
@@ -219,7 +225,7 @@ void	create_mandelbrot()
 				fast_mlx_pixel_put(x, y, color);
 			}*/
 			//if (x == WIDTH / 2 || y == HEIGHT / 2)
-				fast_mlx_pixel_put(x, y, color_bernstein_polynomials1(n));
+			fast_mlx_pixel_put(x, y, 0x000000FF + pow(iterations,5));
 		//	else
 		//		fast_mlx_pixel_put(x, y, 0x00FF0000);
 

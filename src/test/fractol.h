@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:13:36 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/08/03 17:24:32 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/08/03 17:51:18 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 // ======================== DEFINITIONS
 
 // Size of window and images
-# define WIDTH			500
-# define HEIGHT			500
+# define HEIGHT			600
+# define WIDTH			800
 
 // Title of window
 # define TITLE		"fract-ol by pvaladar"
@@ -120,6 +120,7 @@ typedef struct s_pixel
 	int		y;
 }				t_pixel;
 
+			//if (x == WIDTH / 2 || y == HEIGHT / 2)
 /*
 
 re_min Represent the interval [re_min, re_max] which is displayed horizontally
