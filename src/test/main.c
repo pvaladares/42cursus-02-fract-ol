@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 23:13:37 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/08/04 00:35:07 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/08/04 00:47:10 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,30 +65,6 @@ void	create_mlx(void)
 	info()->img_addr = (int *)mlx_get_data_addr(
 		info()->img_ptr, &info()->bits_per_pixel, &info()->line_length,
 		&info()->endian);
-}
-
-int	fractal_mandelbrot(int x, int y)
-{
-	t_complex	c;
-	t_complex	z;
-	int			i;
-
-	// Convert integer x,y coordinates TO double complex Re, Im
-	c.re = info()->re_min + (x * info()->x_ratio);
-	c.im = info()->im_max - (y * info()->y_ratio);
-	z = (t_complex){0.0f, 0.0f}; // z_n0
-	//z.re = 0.0f;  // z_n+1 = z_n * z_n + c, z_0 = 0
-	//z.im = 0.0f;
-	i = 1; // iteration starts on 1
-	while (c.re * c.re + c.im * c.im <= 4 && i <= MAX_ITERATIONS)
-	{
-		z = complex_add(complex_pow2(z), c);
-		i++;
-	}
-	//if (i >= MAX_ITERATIONS)
-	//	mlx_pixel_put(app->mlx_ptr, app->win_ptr, x, y, 0x00FF0000);
-	//fast_mlx_pixel_put(app, x, y, 0x00FF0000);
-	return (i);
 }
 
 int	mouse_button_pressed(int button, int x, int y)
@@ -186,7 +162,7 @@ int	key_released(int keycode)
 	return (0);
 }
 
-void	create_mandelbrot()
+void	fractal_mandelbrot(void)
 {
 	int			x;
 	int			y;
@@ -200,13 +176,16 @@ void	create_mandelbrot()
 		x = -1;
 		while (++x < WIDTH)
 		{
+			z = (t_complex){0.0f, 0.0f};
 			c.re = info()->re_min + (x * info()->x_ratio);
 			c.im = info()->im_max - (y * info()->y_ratio);
-			z.re = 0.0f;
-			z.im = 0.0f;
 			i = 0;
-			while (z.re * z.re + z.im * z.im < 4 && ++i < MAX_ITERATIONS)
+			while (z.re < 2 && z.im < 2 && ++i < MAX_ITERATIONS)
+			{
+				if (z.re * z.re + z.im * z.im >= 4)
+					break ;
 				z = complex_add(complex_pow2(z), c);
+			}
 			set_color(x, y, i);
 		}
 	}
@@ -229,7 +208,7 @@ void set_color(int x, int y, int i)
 
 void	draw()
 {
-	create_mandelbrot();
+	fractal_mandelbrot();
 	mlx_put_image_to_window(info()->mlx_ptr, info()->win_ptr,
 		info()->img_ptr, 0, 0);
 	//fast_mlx_pixel_put(WIDTH / 2, HEIGHT / 2, 0x00FF0000);

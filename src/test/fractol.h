@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:13:36 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/08/04 00:35:19 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/08/04 00:48:33 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,12 +147,11 @@ P(x = 0, y = 0) corresponds to [re_min, im_max]
 t_app	*info(void);
 void	fast_mlx_pixel_put(int x, int y, int color);
 void	initialize_variables();
-int	fractal_mandelbrot(int x, int y);
 int	mouse_button_pressed(int button, int x, int y);
 int	safe_quit();
 int	key_released(int keycode);
-void	create_mandelbrot();
-void	draw();
+void	fractal_mandelbrot(void);
+void	draw(void);
 
 t_complex	complex_pow2(t_complex z);
 t_complex	complex_add(t_complex z1, t_complex z2);
