@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:02:02 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/08/04 13:41:56 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/08/04 16:01:49 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	mouse_moved(int x, int y)
 {
-	//mlx_clear_window(info()->mlx_ptr, info()->win_ptr);
-	if (DEBUG)
-		printf("Cursor moved to coordinates:\t(x = %d, y = %d)\n", x, y);
-	//if (x >= 650 && x <= 750)
-		//mlx_string_put(info()->mlx_ptr, info()->win_ptr, x, y, RED, "50");
+	(void)x;
+	(void)y;
+	display_text();
+	//if (DEBUG)
+	//	printf("Cursor moved to coordinates:\t(x = %d, y = %d)\n", x, y);
 	return (0);
 }
 
@@ -31,9 +31,16 @@ int	mouse_button_pressed(int button, int x, int y)
 		printf("Original cursor coordinates:\t(x = %d, y = %d)\n", x, y);
 	}
 	if (button == Button4) // Scrool up == Zoom in
+	{
+		zoom_in(x, y);
 		puts("Zoom in");
+	}
+		
 	else if (button == Button5) // Zoom out
+	{
+		center(x, y);
 		puts("Zoom out");
+	}
 	if (DEBUG)
 		printf("Correct cursor coordinates:\t(x = %d, y = %d)\n", x, y);
 	return (0);
@@ -81,11 +88,14 @@ int	key_released(int keycode)
 	else if (keycode == XK_plus || keycode == XK_KP_Add)
 	{
 		puts("> +");
-		zoom_in();
 	}
 	else if (keycode == XK_1 || keycode == XK_KP_End)
 		puts("> Mandelbrot");
 	else if (keycode == XK_r) // reset
+	{
+		;
+	}
+	else if (keycode == XK_c) // center at the cursor
 	{
 		;
 	}

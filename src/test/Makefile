@@ -6,7 +6,7 @@
 #    By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/28 16:01:17 by pvaladar          #+#    #+#              #
-#    Updated: 2022/08/03 18:14:36 by pvaladar         ###   ########.fr        #
+#    Updated: 2022/08/04 14:40:48 by pvaladar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC :=	*.c
 OBJ :=	${SRC:.c=.o}
 
 #MLX := /usr/local/lib/libmlx.a
-MLX := ../minilibx-linux/libmlx.a
+MLX := minilibx-linux/libmlx.a
 
 $(NAME): $(SRC)
 #	$(CC) $(CFLAGS) $(SRC) $(MLX) -lXext -lX11 -lm -lz -I/usr/local/include -g -ggdb3 -o $(NAME)

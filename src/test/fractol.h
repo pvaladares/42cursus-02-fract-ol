@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:13:36 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/08/04 14:23:37 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/08/04 16:01:30 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define MANDELBROT		"Mandelbrot"
 // ======================== INCLUDES
 
-# include "../minilibx-linux/mlx.h" // include local MLX library
+# include "minilibx-linux/mlx.h" // include local MLX library
 # include <X11/X.h> // definition of all X events and masks
 /* For each event type, a corresponding constant name is defined in X11/X.h
    More info about the relationship between Event Mask & Event Type here:
@@ -78,7 +78,6 @@ typedef struct s_img
 	double	re_max;
 	double	re_delta;
 	double	im_min;
-# define HEIGHT			600
 	double	im_max;
 	double	im_delta;
 	double	x_ratio;
@@ -109,6 +108,7 @@ typedef struct s_app
 	double	y_ratio;
 	int		max_iterations;
 	char	fractal_id;
+
 }			t_app;
 
 /*
@@ -177,8 +177,19 @@ int	color_bernstein_polynomials1(double t);
 int	color_bernstein_polynomials2(double t);
 int	color_bernstein_polynomials3(double t);
 void set_color(int x, int y, int i);
-void	display_text();
+void	display_text(void);
 int	mouse_moved(int x, int y);
-void	zoom_in(void);
+void	zoom_in(int x, int y);
+void	center(int x, int y);
+
+
+
+
+
+
+
+
+
+char	*ft_itoa(int nbr);
 
 #endif
