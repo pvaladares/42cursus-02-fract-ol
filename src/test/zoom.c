@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:40:47 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/08/04 15:28:38 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/08/04 16:22:51 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	center(int x, int y)
      info()->re_max = interpolate(mouseRe, info()->re_max, 1);
      info()->im_min = interpolate(mouseIm, info()->im_min, 1);
      info()->im_max = interpolate(mouseIm, info()->im_max, 1);
-
+	info()->x_ratio = (info()->re_max - info()->re_min) / (double)WIDTH;
+	info()->y_ratio = (info()->im_max - info()->im_min) / (double)HEIGHT;
 	draw();
 	
 	/*
