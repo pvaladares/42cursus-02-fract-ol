@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:13:36 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/08/04 00:48:33 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/08/04 14:23:37 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 
 // Size of window and images
 # define HEIGHT			600
-# define WIDTH			800
+# define WIDTH			600
+# define MENU_WIDTH		400
 
 // Title of window
 # define TITLE		"fract-ol by pvaladar"
@@ -30,6 +31,14 @@
 // Maximum number of iterations
 # define MAX_ITERATIONS	100
 
+// Colors
+# define RED			0x00FF0000
+# define GREEN			0x0000FF00
+# define BLUE			0x000000FF
+# define WHITE			0x00FFFFFF
+# define BLACK			0
+
+# define MANDELBROT		"Mandelbrot"
 // ======================== INCLUDES
 
 # include "../minilibx-linux/mlx.h" // include local MLX library
@@ -69,6 +78,7 @@ typedef struct s_img
 	double	re_max;
 	double	re_delta;
 	double	im_min;
+# define HEIGHT			600
 	double	im_max;
 	double	im_delta;
 	double	x_ratio;
@@ -97,6 +107,8 @@ typedef struct s_app
 	double	im_delta;
 	double	x_ratio;
 	double	y_ratio;
+	int		max_iterations;
+	char	fractal_id;
 }			t_app;
 
 /*
@@ -131,12 +143,7 @@ re_max
 
 im_min Represent the interval [im_min, im_max] which is displayed vertically
 im_max
-
-re_delta The size of the view in the real and imaginary axis (re_delta = re_max - re_min)
-im_delta
-
-NMAX The number of iterations before concluding that a complex number is part of the a set
-
+0x00FF0000
 Pixel(x, y) The pixel at coordinates x and y, where x is in [0, WIDTH] and y is in [0, HEIGHT]
 
 P(x = 0, y = 0) corresponds to [re_min, im_max]
@@ -170,5 +177,8 @@ int	color_bernstein_polynomials1(double t);
 int	color_bernstein_polynomials2(double t);
 int	color_bernstein_polynomials3(double t);
 void set_color(int x, int y, int i);
+void	display_text();
+int	mouse_moved(int x, int y);
+void	zoom_in(void);
 
 #endif
