@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:04:23 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/08/04 16:34:43 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/08/06 02:28:52 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,25 @@ void set_color(int x, int y, int i)
 	}
 }
 
-void	draw()
+void	draw(void)
 {
+	int	x;
+	int	y;
+	int	iterations;
+
 	mlx_clear_window(info()->mlx_ptr, info()->win_ptr);
-	fractal_mandelbrot();
-	display_text();
+	y = -1;
+	while (++y < HEIGHT)
+	{
+		x = -1;
+		while (++x < WIDTH)
+		{
+			iterations = fractal_mandelbrot(x, y);
+			set_color(x, y, iterations);
+		}
+	}
+	//display_text();
 	mlx_put_image_to_window(info()->mlx_ptr, info()->win_ptr,
 		info()->img_ptr, 0, 0);
 	//fast_mlx_pixel_put(WIDTH / 2, HEIGHT / 2, 0x00FF0000);
-
 }

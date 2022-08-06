@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:13:36 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/08/04 16:01:30 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/08/06 02:27:47 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 // Debug variable: ON = 1 / OFF = 0
 # ifndef DEBUG
-#  define DEBUG			1
+#  define DEBUG			0
 # endif
 
 // Maximum number of iterations
@@ -154,10 +154,10 @@ P(x = 0, y = 0) corresponds to [re_min, im_max]
 t_app	*info(void);
 void	fast_mlx_pixel_put(int x, int y, int color);
 void	initialize_variables();
-int	mouse_button_pressed(int button, int x, int y);
-int	safe_quit();
-int	key_released(int keycode);
-void	fractal_mandelbrot(void);
+int		mouse_pressed(int button, int x, int y);
+int		safe_quit();
+int		key_released(int keycode);
+int		fractal_mandelbrot(int x, int y);
 void	draw(void);
 
 t_complex	complex_pow2(t_complex z);
@@ -182,8 +182,8 @@ int	mouse_moved(int x, int y);
 void	zoom_in(int x, int y);
 void	center(int x, int y);
 
-
-
+void	hooks(void);
+t_complex	pixel2complex(int x, int y);
 
 
 

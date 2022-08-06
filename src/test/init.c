@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:03:37 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/08/04 13:20:09 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/08/06 02:25:50 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,17 @@ void	create_mlx(void)
 
 void	initialize_variables(void)
 {
-	info()->re_min = -2.0f;
-	info()->re_max = +2.0f;
-	info()->im_min = -2.0f;
-	info()->im_max = +2.0f;
-	info()->x_ratio = (info()->re_max - info()->re_min) / (double)WIDTH;
-	info()->y_ratio = (info()->im_max - info()->im_min) / (double)HEIGHT;
+	info()->re_min = -2.2f;
+	info()->re_max = +2.2f;
+	info()->im_min = -2.2f;
+	info()->im_max = +2.2f;
+	//info()->x_ratio = (info()->re_max - info()->re_min) / (double)WIDTH;
+	//info()->y_ratio = (info()->im_max - info()->im_min) / (double)HEIGHT;
 	if (DEBUG)
 	{
-		printf("x ratio: (%f)\n", info()->x_ratio);
-		printf("y ratio: (%f)\n", info()->y_ratio);
+		//printf("x ratio: (%f)\n", info()->x_ratio);
+		//printf("y ratio: (%f)\n", info()->y_ratio);
 	}
-	create_mlx();
 	info()->max_iterations = MAX_ITERATIONS;
 	info()->fractal_id = 1;
 }

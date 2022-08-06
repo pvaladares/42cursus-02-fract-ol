@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:02:02 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/08/04 16:01:49 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/08/06 02:26:38 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ int	mouse_moved(int x, int y)
 {
 	(void)x;
 	(void)y;
-	display_text();
+	//display_text();
 	//if (DEBUG)
 	//	printf("Cursor moved to coordinates:\t(x = %d, y = %d)\n", x, y);
 	return (0);
 }
 
-int	mouse_button_pressed(int button, int x, int y)
+int	mouse_pressed(int button, int x, int y)
 {
 	if (DEBUG)
 	{
@@ -35,10 +35,11 @@ int	mouse_button_pressed(int button, int x, int y)
 		zoom_in(x, y);
 		puts("Zoom in");
 	}
-		
+	else if (button == Button1)
+		center(x, y);
 	else if (button == Button5) // Zoom out
 	{
-		center(x, y);
+		//center(x, y);
 		puts("Zoom out");
 	}
 	if (DEBUG)
