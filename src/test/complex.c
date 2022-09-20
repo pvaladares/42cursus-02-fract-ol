@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 15:39:20 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/08/03 23:09:26 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/09/20 15:37:11 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_complex	complex_pow2(t_complex z)
 }
 
 /*
- Function adds two complex numbers and returns the resul
+ Function adds two complex numbers and returns the result
 */
 t_complex	complex_add(t_complex z1, t_complex z2)
 {

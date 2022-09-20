@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:13:36 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/08/06 02:27:47 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/09/20 16:38:56 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,25 +64,28 @@
 	endian			: the endian format (https://en.wikipedia.org/wiki/Endianness)
 					    (set by MiniLibX for the current data address)
 */
-typedef struct s_img
-{
-	void	*img_ptr;
-	//char	*addr;
-	/* https://github.com/keuhdall/images_example/blob/master/example.h
-	*/
-	int		*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	double	re_min;
-	double	re_max;
-	double	re_delta;
-	double	im_min;
-	double	im_max;
-	double	im_delta;
-	double	x_ratio;
-	double	y_ratio;
-}			t_img;
+
+
+
+// typedef struct s_img
+// {
+// 	void	*img_ptr;
+// 	//char	*addr;
+// 	/* https://github.com/keuhdall/images_example/blob/master/example.h
+// 	*/
+// 	int		*addr;
+// 	int		bits_per_pixel;
+// 	int		line_length;
+// 	int		endian;
+// 	double	re_min;
+// 	double	re_max;
+// 	double	re_delta;
+// 	double	im_min;
+// 	double	im_max;
+// 	double	im_delta;
+// 	double	x_ratio;
+// 	double	y_ratio;
+// }			t_img;
 
 /*
 	mlx_ptr				: a pointer to the mlx instance
@@ -100,12 +103,10 @@ typedef struct s_app
 	int		endian;
 	double	re_min;
 	double	re_max;
-	double	re_delta;
 	double	im_min;
 	double	im_max;
-	double	im_delta;
-	double	x_ratio;
-	double	y_ratio;
+	// double	x_ratio;
+	// double	y_ratio;
 	int		max_iterations;
 	char	fractal_id;
 
@@ -176,10 +177,12 @@ int	color_add_shape(double distance, int trgb);
 int	color_bernstein_polynomials1(double t);
 int	color_bernstein_polynomials2(double t);
 int	color_bernstein_polynomials3(double t);
-void set_color(int x, int y, int i);
+//void set_color(int x, int y, int i);
 void	display_text(void);
 int	mouse_moved(int x, int y);
 void	zoom_in(int x, int y);
+void	zoom_out(int x, int y);
+
 void	center(int x, int y);
 
 void	hooks(void);

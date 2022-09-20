@@ -6,22 +6,30 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:02:02 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/08/06 02:26:38 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/09/20 16:37:41 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+/*
+ This functions handles the cursor movement
+ If DEBUG is defined, it prints the coordinates of the cursor
+*/
 int	mouse_moved(int x, int y)
 {
-	(void)x;
-	(void)y;
-	//display_text();
-	//if (DEBUG)
-	//	printf("Cursor moved to coordinates:\t(x = %d, y = %d)\n", x, y);
+	display_text();
+	if (DEBUG)
+		printf("Cursor moved to coordinates:\t(x = %d, y = %d)\n", x, y);
 	return (0);
 }
 
+/*
+ This function handles the mouse button press
+	Button1 = Left mouse button
+	Button4 = Scrool up / Zoom in
+	Button5 = Scroll down / Zoom out 
+*/
 int	mouse_pressed(int button, int x, int y)
 {
 	if (DEBUG)
@@ -35,18 +43,27 @@ int	mouse_pressed(int button, int x, int y)
 		zoom_in(x, y);
 		puts("Zoom in");
 	}
-	else if (button == Button1)
-		center(x, y);
 	else if (button == Button5) // Zoom out
 	{
 		//center(x, y);
+		zoom_out(x, y);
 		puts("Zoom out");
 	}
+	else if (button == Button1)
+	{
+		puts("Button 1");
+		center(x, y);
+		draw();
+	}
+
 	if (DEBUG)
-		printf("Correct cursor coordinates:\t(x = %d, y = %d)\n", x, y);
+		printf("Mouse pressed routine\t(x = %d, y = %d)\n", x, y);
 	return (0);
 }
 
+/*
+ This function is called when a key is released
+*/
 int	key_released(int keycode)
 {
 	//mlx_clear_window(info()->mlx_ptr, info()->win_ptr);
@@ -94,22 +111,25 @@ int	key_released(int keycode)
 		puts("> Mandelbrot");
 	else if (keycode == XK_r) // reset
 	{
-		;
+		initialize_variables();
+		draw();
 	}
 	else if (keycode == XK_c) // center at the cursor
 	{
-		;
+		mlx_clear_window(info()->mlx_ptr, info()->win_ptr);
 	}
 	else if (keycode == XK_Page_Up || keycode == XK_KP_Page_Up)
 	{
 		printf("Max iterations = (%d)\n", info()->max_iterations);
-		info()->max_iterations *= 2;
+		if (info()->max_iterations < 10000)
+			info()->max_iterations *= 2;
 		draw();
 	}
 	else if (keycode == XK_Page_Down || keycode == XK_KP_Page_Down)
 	{
 		printf("Max iterations = (%d)\n", info()->max_iterations);
-		info()->max_iterations /= 2;
+		if (info()->max_iterations > 2)
+			info()->max_iterations /= 2;
 		draw();
 	}
 	return (0);

@@ -6,12 +6,16 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:01:02 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/08/06 01:51:16 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/09/20 16:47:59 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+/*
+ Function returns the number of iterations, that a given pixel takes to
+ diverge from the Mandelbrot set
+*/
 int	fractal_mandelbrot(int x, int y)
 {
 	t_complex	c;

@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:06:30 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/08/04 16:11:56 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/08/08 19:03:53 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	display_text(void)
 
 	mlx_mouse_get_pos(info()->mlx_ptr, info()->win_ptr, &x, &y);
 
+// clear
 	mlx_clear_window(info()->mlx_ptr, info()->win_ptr);
 
 	
@@ -35,8 +36,14 @@ void	display_text(void)
 
 
 	mlx_string_put(info()->mlx_ptr, info()->win_ptr, WIDTH, spacing * 3, WHITE, "  xmax = ");
+	mlx_string_put(info()->mlx_ptr, info()->win_ptr, WIDTH + strlen("  ymax = ") + 50, spacing * 3, WHITE, gcvt(info()->re_max, 5, buff));
+
 	mlx_string_put(info()->mlx_ptr, info()->win_ptr, WIDTH, spacing * 4, WHITE, "  ymin = ");
+	mlx_string_put(info()->mlx_ptr, info()->win_ptr, WIDTH + strlen("  ymin = ") + 50, spacing * 4, WHITE, gcvt(info()->im_min, 5, buff));
+
 	mlx_string_put(info()->mlx_ptr, info()->win_ptr, WIDTH, spacing * 5, WHITE, "  ymax = ");
+	mlx_string_put(info()->mlx_ptr, info()->win_ptr, WIDTH + strlen("  ymax = ") + 50, spacing * 5, WHITE, gcvt(info()->im_max, 5, buff));
+
 	mlx_string_put(info()->mlx_ptr, info()->win_ptr, WIDTH, spacing * 8, WHITE, " CONTROLS");
 	mlx_string_put(info()->mlx_ptr, info()->win_ptr, WIDTH, spacing * 9, WHITE, " Current mouse position:");
 	mlx_string_put(info()->mlx_ptr, info()->win_ptr, WIDTH, spacing * 10, WHITE, "  x:");
@@ -65,6 +72,7 @@ void	display_text(void)
 	buff = ft_itoa(info()->max_iterations);
 	mlx_string_put(info()->mlx_ptr, info()->win_ptr, WIDTH, spacing * 23, WHITE, buff);
 
+// put image back
 	mlx_put_image_to_window(info()->mlx_ptr, info()->win_ptr, info()->img_ptr, 0, 0);
 
 	free(buff);
