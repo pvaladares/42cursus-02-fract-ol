@@ -6,7 +6,7 @@
 /*   By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 15:56:47 by pvaladar          #+#    #+#             */
-/*   Updated: 2022/07/29 23:34:18 by pvaladar         ###   ########.fr       */
+/*   Updated: 2022/11/11 15:37:02 by pvaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define DEBUG		1
 // ======================== INCLUDES
 
-# include <mlx.h> // MLX library
+# include "minilibx-linux/mlx.h" // include local MLX library
 # include <X11/X.h>
 /* For each event type, a corresponding constant name is defined in X11/X.h
    More info about the relationship between Event Mask & Event Type here:
