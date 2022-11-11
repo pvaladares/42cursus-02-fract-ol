@@ -6,7 +6,7 @@
 #    By: pvaladar <pvaladar@student.42lisboa.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/28 16:01:17 by pvaladar          #+#    #+#              #
-#    Updated: 2022/08/04 14:40:48 by pvaladar         ###   ########.fr        #
+#    Updated: 2022/11/11 14:59:29 by pvaladar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,14 @@ CC := cc
 
 CFLAGS := -Wall -Werror -Wextra -g -fsanitize=address,undefined,leak -O3
 
+# Replace explicitly by the source code files instead before submitting
 SRC :=	*.c
 
 OBJ :=	${SRC:.c=.o}
 
 #MLX := /usr/local/lib/libmlx.a
-MLX := minilibx-linux/libmlx.a
+MLX_PATH := minilibx-linux
+MLX := $(MLX_PATH)/libmlx.a
 
 $(NAME): $(SRC)
 #	$(CC) $(CFLAGS) $(SRC) $(MLX) -lXext -lX11 -lm -lz -I/usr/local/include -g -ggdb3 -o $(NAME)
@@ -48,7 +50,7 @@ mlx:
 	@echo "==== Downling sources ===="
 	@git clone https://github.com/42Paris/minilibx-linux
 	@echo "==== Building MLX ===="
-	@make -C minilibx-linux
+	@make -C $(MLX_PATH)
 #	@mv minilibx-linux libmlx
 #	@echo "==== Copying the MLX library and manpages to local path ===="
 #	@sudo cp minilibx-linux/*.a /usr/local/lib
